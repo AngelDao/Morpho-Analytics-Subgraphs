@@ -1,0 +1,21 @@
+# one of these for each pool, for live and daily data
+
+type DailyDataForMarket @entity {
+  id: ID!
+  cTokenAddress: Bytes!
+  amountAddedOnPool: BigDecimal!
+  amountAddedInP2P: BigDecimal!
+  amountRemovedFromPool: BigDecimal!
+  amountRemovedFromP2P: BigDecimal!
+}
+
+type AllTimeDataForMarket @entity {
+  id: ID!
+  cTokenAddress: Bytes!
+  amountAddedOnPool: BigDecimal!
+  amountAddedInP2P: BigDecimal!
+  amountRemovedFromPool: BigDecimal!
+  amountRemovedFromP2P: BigDecimal!
+  netAmountAddedOnPool: BigDecimal!
+  netAmountAddedInP2P: BigDecimal!
+}

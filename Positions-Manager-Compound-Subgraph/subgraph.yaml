@@ -1,0 +1,41 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: PositionsManagerForCompound
+    network: ropsten
+    source:
+      address: "0xdef2d58c17c340ad572e2c94549ba56e8c2e1c2f"
+      abi: PositionsManagerForCompound
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Borrowed
+        - BorrowerPositionUpdated
+        - Liquidated
+        - Repaid
+        - Supplied
+        - SupplierPositionUpdated
+        - Withdrawn
+      abis:
+        - name: PositionsManagerForCompound
+          file: ./abis/PositionsManagerForCompound.json
+      eventHandlers:
+        - event: Borrowed(indexed address,indexed address,uint256)
+          handler: handleBorrowed
+        - event: BorrowerPositionUpdated(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBorrowerPositionUpdated
+        - event: Liquidated(indexed address,indexed address,uint256,address,uint256,address)
+          handler: handleLiquidated
+        - event: Repaid(indexed address,indexed address,uint256)
+          handler: handleRepaid
+        - event: Supplied(indexed address,indexed address,uint256)
+          handler: handleSupplied
+        - event: SupplierPositionUpdated(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256,uint256)
+          handler: handleSupplierPositionUpdated
+        - event: Withdrawn(indexed address,indexed address,uint256)
+          handler: handleWithdrawn
+      file: ./src/mapping.ts
