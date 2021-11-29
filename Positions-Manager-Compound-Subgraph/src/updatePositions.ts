@@ -1,13 +1,8 @@
 import { BigInt, ethereum } from "@graphprotocol/graph-ts"
 import {
   PositionsManagerForCompound,
-  Borrowed,
   BorrowerPositionUpdated,
-  Liquidated,
-  Repaid,
-  Supplied,
   SupplierPositionUpdated,
-  Withdrawn
 } from "../generated/PositionsManagerForCompound/PositionsManagerForCompound"
 import { DailyDataForMarket, AllTimeDataForMarket } from "../generated/schema"
 
