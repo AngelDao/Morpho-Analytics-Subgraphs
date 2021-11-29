@@ -10,17 +10,17 @@ import {
   Withdrawn
 } from "../generated/PositionsManagerForCompound/PositionsManagerForCompound"
 import { DailyDataForMarket, AllTimeDataForMarket } from "../generated/schema"
-import { updatePositionsDailyData, updatePositionsAllTimeData } from './updatePositions'
+import { updatePositionsDailyDataBorrow, updatePositionsDailyDataSupply, updatePositionsAllTimeDataBorrow, updatePositionsAllTimeDataSupply } from './updatePositions'
 
 
 export function handleBorrowerPositionUpdated(
   event: BorrowerPositionUpdated
 ): void {
 
-  let DailyData = updatePairDayData(BorrowerPositionUpdated)
+  let DailyData = updatePositionsDailyDataBorrow(event)
   DailyData.save()
 
-  let AllData = updatePositionsAllTimeData(BorrowerPositionUpdated)
+  let AllData = updatePositionsAllTimeDataBorrow(event)
   AllData.save()
 
 }
@@ -30,11 +30,11 @@ export function handleSupplierPositionUpdated(
   event: SupplierPositionUpdated
 ): void {
 
-  let DailyData = updatePairDayData(SupplierPositionUpdated)
+  let DailyData = updatePositionsDailyDataSupply(event)
   DailyData.save()
 
-  let AllData = updatePositionsAllTimeData(SupplierPositionUpdated)
+  let AllData = updatePositionsAllTimeDataSupply(event)
   AllData.save()
-  
+
 }
 

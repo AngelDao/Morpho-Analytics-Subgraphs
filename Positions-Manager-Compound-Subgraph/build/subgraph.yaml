@@ -1,6 +1,6 @@
 specVersion: 0.0.2
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: PositionsManagerForCompound
@@ -23,11 +23,12 @@ dataSources:
         - Withdrawn
       abis:
         - name: PositionsManagerForCompound
-          file: ./abis/PositionsManagerForCompound.json
+          file: PositionsManagerForCompound/abis/PositionsManagerForCompound.json
       eventHandlers:
         - event: Borrowed(indexed address,indexed address,uint256)
           handler: handleBorrowed
-        - event: BorrowerPositionUpdated(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256,uint256)
+        - event: BorrowerPositionUpdated(indexed address,indexed
+            address,uint256,uint256,uint256,uint256,uint256,uint256)
           handler: handleBorrowerPositionUpdated
         - event: Liquidated(indexed address,indexed address,uint256,address,uint256,address)
           handler: handleLiquidated
@@ -35,8 +36,9 @@ dataSources:
           handler: handleRepaid
         - event: Supplied(indexed address,indexed address,uint256)
           handler: handleSupplied
-        - event: SupplierPositionUpdated(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256,uint256)
+        - event: SupplierPositionUpdated(indexed address,indexed
+            address,uint256,uint256,uint256,uint256,uint256,uint256)
           handler: handleSupplierPositionUpdated
         - event: Withdrawn(indexed address,indexed address,uint256)
           handler: handleWithdrawn
-      file: ./src/mapping.ts
+      file: PositionsManagerForCompound/PositionsManagerForCompound.wasm

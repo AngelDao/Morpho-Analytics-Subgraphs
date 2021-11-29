@@ -11,31 +11,35 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class ExampleEntity extends Entity {
+export class DailyDataForMarket extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
 
-    this.set("count", Value.fromBigInt(BigInt.zero()));
-    this.set("_account", Value.fromBytes(Bytes.empty()));
-    this.set("_cTokenAddress", Value.fromBytes(Bytes.empty()));
+    this.set("cTokenAddress", Value.fromBytes(Bytes.empty()));
+    this.set("amountAddedOnPool", Value.fromBigInt(BigInt.zero()));
+    this.set("amountAddedInP2P", Value.fromBigInt(BigInt.zero()));
+    this.set("amountRemovedFromPool", Value.fromBigInt(BigInt.zero()));
+    this.set("amountRemovedFromP2P", Value.fromBigInt(BigInt.zero()));
   }
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save ExampleEntity entity without an ID");
+    assert(id != null, "Cannot save DailyDataForMarket entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        "Cannot save ExampleEntity entity with non-string ID. " +
+        "Cannot save DailyDataForMarket entity with non-string ID. " +
           'Considering using .toHex() to convert the "id" to a string.'
       );
-      store.set("ExampleEntity", id.toString(), this);
+      store.set("DailyDataForMarket", id.toString(), this);
     }
   }
 
-  static load(id: string): ExampleEntity | null {
-    return changetype<ExampleEntity | null>(store.get("ExampleEntity", id));
+  static load(id: string): DailyDataForMarket | null {
+    return changetype<DailyDataForMarket | null>(
+      store.get("DailyDataForMarket", id)
+    );
   }
 
   get id(): string {
@@ -47,30 +51,154 @@ export class ExampleEntity extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get count(): BigInt {
-    let value = this.get("count");
+  get cTokenAddress(): Bytes {
+    let value = this.get("cTokenAddress");
+    return value!.toBytes();
+  }
+
+  set cTokenAddress(value: Bytes) {
+    this.set("cTokenAddress", Value.fromBytes(value));
+  }
+
+  get amountAddedOnPool(): BigInt {
+    let value = this.get("amountAddedOnPool");
     return value!.toBigInt();
   }
 
-  set count(value: BigInt) {
-    this.set("count", Value.fromBigInt(value));
+  set amountAddedOnPool(value: BigInt) {
+    this.set("amountAddedOnPool", Value.fromBigInt(value));
   }
 
-  get _account(): Bytes {
-    let value = this.get("_account");
+  get amountAddedInP2P(): BigInt {
+    let value = this.get("amountAddedInP2P");
+    return value!.toBigInt();
+  }
+
+  set amountAddedInP2P(value: BigInt) {
+    this.set("amountAddedInP2P", Value.fromBigInt(value));
+  }
+
+  get amountRemovedFromPool(): BigInt {
+    let value = this.get("amountRemovedFromPool");
+    return value!.toBigInt();
+  }
+
+  set amountRemovedFromPool(value: BigInt) {
+    this.set("amountRemovedFromPool", Value.fromBigInt(value));
+  }
+
+  get amountRemovedFromP2P(): BigInt {
+    let value = this.get("amountRemovedFromP2P");
+    return value!.toBigInt();
+  }
+
+  set amountRemovedFromP2P(value: BigInt) {
+    this.set("amountRemovedFromP2P", Value.fromBigInt(value));
+  }
+}
+
+export class AllTimeDataForMarket extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("cTokenAddress", Value.fromBytes(Bytes.empty()));
+    this.set("amountAddedOnPool", Value.fromBigInt(BigInt.zero()));
+    this.set("amountAddedInP2P", Value.fromBigInt(BigInt.zero()));
+    this.set("amountRemovedFromPool", Value.fromBigInt(BigInt.zero()));
+    this.set("amountRemovedFromP2P", Value.fromBigInt(BigInt.zero()));
+    this.set("netAmountAddedOnPool", Value.fromBigInt(BigInt.zero()));
+    this.set("netAmountAddedInP2P", Value.fromBigInt(BigInt.zero()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save AllTimeDataForMarket entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save AllTimeDataForMarket entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("AllTimeDataForMarket", id.toString(), this);
+    }
+  }
+
+  static load(id: string): AllTimeDataForMarket | null {
+    return changetype<AllTimeDataForMarket | null>(
+      store.get("AllTimeDataForMarket", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get cTokenAddress(): Bytes {
+    let value = this.get("cTokenAddress");
     return value!.toBytes();
   }
 
-  set _account(value: Bytes) {
-    this.set("_account", Value.fromBytes(value));
+  set cTokenAddress(value: Bytes) {
+    this.set("cTokenAddress", Value.fromBytes(value));
   }
 
-  get _cTokenAddress(): Bytes {
-    let value = this.get("_cTokenAddress");
-    return value!.toBytes();
+  get amountAddedOnPool(): BigInt {
+    let value = this.get("amountAddedOnPool");
+    return value!.toBigInt();
   }
 
-  set _cTokenAddress(value: Bytes) {
-    this.set("_cTokenAddress", Value.fromBytes(value));
+  set amountAddedOnPool(value: BigInt) {
+    this.set("amountAddedOnPool", Value.fromBigInt(value));
+  }
+
+  get amountAddedInP2P(): BigInt {
+    let value = this.get("amountAddedInP2P");
+    return value!.toBigInt();
+  }
+
+  set amountAddedInP2P(value: BigInt) {
+    this.set("amountAddedInP2P", Value.fromBigInt(value));
+  }
+
+  get amountRemovedFromPool(): BigInt {
+    let value = this.get("amountRemovedFromPool");
+    return value!.toBigInt();
+  }
+
+  set amountRemovedFromPool(value: BigInt) {
+    this.set("amountRemovedFromPool", Value.fromBigInt(value));
+  }
+
+  get amountRemovedFromP2P(): BigInt {
+    let value = this.get("amountRemovedFromP2P");
+    return value!.toBigInt();
+  }
+
+  set amountRemovedFromP2P(value: BigInt) {
+    this.set("amountRemovedFromP2P", Value.fromBigInt(value));
+  }
+
+  get netAmountAddedOnPool(): BigInt {
+    let value = this.get("netAmountAddedOnPool");
+    return value!.toBigInt();
+  }
+
+  set netAmountAddedOnPool(value: BigInt) {
+    this.set("netAmountAddedOnPool", Value.fromBigInt(value));
+  }
+
+  get netAmountAddedInP2P(): BigInt {
+    let value = this.get("netAmountAddedInP2P");
+    return value!.toBigInt();
+  }
+
+  set netAmountAddedInP2P(value: BigInt) {
+    this.set("netAmountAddedInP2P", Value.fromBigInt(value));
   }
 }
