@@ -33,10 +33,10 @@ export function updatePositionsDailyDataBorrow(event: BorrowerPositionUpdated): 
 
   // multiply amounts by exchange rate
   // from https://www.notion.so/morpho-labs/Compound-Protocol-cfc633dc14e845d1b18b65b1658f77e2 
-  dayData.amountAddedOnPool = dayData.amountAddedOnPool.plus(event.params._amountAddedOnPool * event.params._p2pExchangeRate)
-  dayData.amountAddedInP2P = dayData.amountAddedInP2P.plus(event.params._amountAddedInP2P * event.params._p2pExchangeRate)
-  dayData.amountRemovedFromPool = dayData.amountRemovedFromPool.plus(event.params._amountRemovedFromPool * event.params._p2pExchangeRate)
-  dayData.amountRemovedFromP2P = dayData.amountRemovedFromP2P.plus(event.params._amountRemovedFromP2P * event.params._p2pExchangeRate)
+  dayData.amountAddedOnPool = dayData.amountAddedOnPool.plus(event.params._amountAddedOnPool)
+  dayData.amountAddedInP2P = dayData.amountAddedInP2P.plus(event.params._amountAddedInP2P)
+  dayData.amountRemovedFromPool = dayData.amountRemovedFromPool.plus(event.params._amountRemovedFromPool)
+  dayData.amountRemovedFromP2P = dayData.amountRemovedFromP2P.plus(event.params._amountRemovedFromP2P)
 
   return dayData as DailyDataForMarket
 
@@ -64,10 +64,10 @@ export function updatePositionsDailyDataSupply(event: SupplierPositionUpdated): 
 
   // multiply amounts by exchange rate
   // from https://www.notion.so/morpho-labs/Compound-Protocol-cfc633dc14e845d1b18b65b1658f77e2 
-  dayData.amountAddedOnPool = dayData.amountAddedOnPool.plus(event.params._amountAddedOnPool * event.params._p2pExchangeRate)
-  dayData.amountAddedInP2P = dayData.amountAddedInP2P.plus(event.params._amountAddedInP2P * event.params._p2pExchangeRate)
-  dayData.amountRemovedFromPool = dayData.amountRemovedFromPool.plus(event.params._amountRemovedFromPool * event.params._p2pExchangeRate)
-  dayData.amountRemovedFromP2P = dayData.amountRemovedFromP2P.plus(event.params._amountRemovedFromP2P * event.params._p2pExchangeRate)
+  dayData.amountAddedOnPool = dayData.amountAddedOnPool.plus(event.params._amountAddedOnPool)
+  dayData.amountAddedInP2P = dayData.amountAddedInP2P.plus(event.params._amountAddedInP2P)
+  dayData.amountRemovedFromPool = dayData.amountRemovedFromPool.plus(event.params._amountRemovedFromPool)
+  dayData.amountRemovedFromP2P = dayData.amountRemovedFromP2P.plus(event.params._amountRemovedFromP2P)
 
   return dayData as DailyDataForMarket
 
@@ -89,12 +89,12 @@ export function updatePositionsAllTimeDataBorrow(event: BorrowerPositionUpdated)
 
   // multiply amounts by exchange rate
   // from https://www.notion.so/morpho-labs/Compound-Protocol-cfc633dc14e845d1b18b65b1658f77e2 
-  allData.amountAddedOnPool = allData.amountAddedOnPool.plus(event.params._amountAddedOnPool * event.params._p2pExchangeRate)
-  allData.amountAddedInP2P = allData.amountAddedInP2P.plus(event.params._amountAddedInP2P * event.params._p2pExchangeRate)
-  allData.amountRemovedFromPool = allData.amountRemovedFromPool.plus(event.params._amountRemovedFromPool * event.params._p2pExchangeRate)
-  allData.amountRemovedFromP2P = allData.amountRemovedFromP2P.plus(event.params._amountRemovedFromP2P * event.params._p2pExchangeRate)
-  allData.netAmountAddedOnPool = allData.netAmountAddedOnPool.plus(event.params._amountAddedOnPool * event.params._p2pExchangeRate).minus(event.params._amountRemovedFromPool * event.params._p2pExchangeRate)
-  allData.netAmountAddedInP2P = allData.netAmountAddedInP2P.plus(event.params._amountAddedInP2P * event.params._p2pExchangeRate).minus(event.params._amountRemovedFromP2P * event.params._p2pExchangeRate)
+  allData.amountAddedOnPool = allData.amountAddedOnPool.plus(event.params._amountAddedOnPool)
+  allData.amountAddedInP2P = allData.amountAddedInP2P.plus(event.params._amountAddedInP2P)
+  allData.amountRemovedFromPool = allData.amountRemovedFromPool.plus(event.params._amountRemovedFromPool)
+  allData.amountRemovedFromP2P = allData.amountRemovedFromP2P.plus(event.params._amountRemovedFromP2P)
+  allData.netAmountAddedOnPool = allData.netAmountAddedOnPool.plus(event.params._amountAddedOnPool).minus(event.params._amountRemovedFromPool)
+  allData.netAmountAddedInP2P = allData.netAmountAddedInP2P.plus(event.params._amountAddedInP2P).minus(event.params._amountRemovedFromP2P)
 
   return allData as AllTimeDataForMarket
 
@@ -116,12 +116,12 @@ export function updatePositionsAllTimeDataSupply(event: SupplierPositionUpdated)
 
   // multiply amounts by exchange rate
   // from https://www.notion.so/morpho-labs/Compound-Protocol-cfc633dc14e845d1b18b65b1658f77e2 
-  allData.amountAddedOnPool = allData.amountAddedOnPool.plus(event.params._amountAddedOnPool * event.params._p2pExchangeRate)
-  allData.amountAddedInP2P = allData.amountAddedInP2P.plus(event.params._amountAddedInP2P * event.params._p2pExchangeRate)
-  allData.amountRemovedFromPool = allData.amountRemovedFromPool.plus(event.params._amountRemovedFromPool * event.params._p2pExchangeRate)
-  allData.amountRemovedFromP2P = allData.amountRemovedFromP2P.plus(event.params._amountRemovedFromP2P * event.params._p2pExchangeRate)
-  allData.netAmountAddedOnPool = allData.netAmountAddedOnPool.plus(event.params._amountAddedOnPool * event.params._p2pExchangeRate).minus(event.params._amountRemovedFromPool * event.params._p2pExchangeRate)
-  allData.netAmountAddedInP2P = allData.netAmountAddedInP2P.plus(event.params._amountAddedInP2P * event.params._p2pExchangeRate).minus(event.params._amountRemovedFromP2P * event.params._p2pExchangeRate)
+  allData.amountAddedOnPool = allData.amountAddedOnPool.plus(event.params._amountAddedOnPool)
+  allData.amountAddedInP2P = allData.amountAddedInP2P.plus(event.params._amountAddedInP2P)
+  allData.amountRemovedFromPool = allData.amountRemovedFromPool.plus(event.params._amountRemovedFromPool)
+  allData.amountRemovedFromP2P = allData.amountRemovedFromP2P.plus(event.params._amountRemovedFromP2P)
+  allData.netAmountAddedOnPool = allData.netAmountAddedOnPool.plus(event.params._amountAddedOnPool).minus(event.params._amountRemovedFromPool)
+  allData.netAmountAddedInP2P = allData.netAmountAddedInP2P.plus(event.params._amountAddedInP2P).minus(event.params._amountRemovedFromP2P)
 
   return allData as AllTimeDataForMarket
 

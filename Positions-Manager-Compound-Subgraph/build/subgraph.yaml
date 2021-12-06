@@ -6,7 +6,7 @@ dataSources:
     name: PositionsManagerForCompound
     network: ropsten
     source:
-      address: "0xdef2d58c17c340ad572e2c94549ba56e8c2e1c2f"
+      address: "0xc4fcdb90e76c84ead1f1bc2427866d0c8c3198fa"
       abi: PositionsManagerForCompound
       startBlock: 11506156
     mapping:
