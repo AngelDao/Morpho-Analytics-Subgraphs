@@ -4,7 +4,7 @@ import {
   BorrowerPositionUpdated,
   SupplierPositionUpdated,
 } from "../generated/PositionsManagerForCompound/PositionsManagerForCompound"
-import { DailyDataForMarket, AllTimeDataForMarket } from "../generated/schema"
+import { DailyDataForMarket, AllTimeDataForMarket, User } from "../generated/schema"
 
   // I tried to do this with two functions using event: ethereum.Event like:
   // export function updatePositionsDailyData(event: ethereum.Event): DailyDataForMarket {
@@ -38,6 +38,50 @@ export function updatePositionsDailyDataBorrow(event: BorrowerPositionUpdated): 
   dayData.amountRemovedFromPool = dayData.amountRemovedFromPool.plus(event.params._amountRemovedFromPool)
   dayData.amountRemovedFromP2P = dayData.amountRemovedFromP2P.plus(event.params._amountRemovedFromP2P)
 
+  dayData.netAmountAddedOnPool = dayData.netAmountAddedOnPool.plus(event.params._amountAddedOnPool).minus(event.params._amountRemovedFromPool)
+  dayData.netAmountAddedInP2P = dayData.netAmountAddedInP2P.plus(event.params._amountAddedInP2P).minus(event.params._amountRemovedFromP2P)
+
+  // for borrow position 
+  dayData.netAmountBorrowedOnPool = dayData.netAmountBorrowedOnPool.plus(event.params._amountAddedOnPool).minus(event.params._amountRemovedFromPool)
+  dayData.amountBorrowedOnPool = dayData.amountBorrowedOnPool.plus(event.params._amountAddedOnPool)
+
+  //user and date
+
+  const day = event.block.timestamp.toI32() / 86400
+  const date = day * 86400
+
+  if (!dayData.date) {
+    dayData.date = date
+  }
+
+  let userData = User.load(event.params._account.toHexString())
+  if (userData == null) {
+
+    userData = new User(event.params._account.toHexString())
+    userData.date = date
+    userData.save()
+
+    dayData.userCount = dayData.userCount.plus(BigInt.fromI32(1))
+    dayData.newUsers = dayData.newUsers.plus(BigInt.fromI32(1))
+    
+    let allData = AllTimeDataForMarket.load(event.params._cTokenAddress.toHexString())
+    if (allData){
+      allData.userCount = allData.userCount.plus(BigInt.fromI32(1))
+      allData.save()
+    }
+
+  } else {
+    if (userData.date <= dayData.date ){
+      userData.date = date
+      userData.save()
+      dayData.userCount = dayData.userCount.plus(BigInt.fromI32(1))
+    } else {
+      userData.date = date
+      userData.save()
+    }
+  }
+
+
   return dayData as DailyDataForMarket
 
 }
@@ -69,6 +113,46 @@ export function updatePositionsDailyDataSupply(event: SupplierPositionUpdated): 
   dayData.amountRemovedFromPool = dayData.amountRemovedFromPool.plus(event.params._amountRemovedFromPool)
   dayData.amountRemovedFromP2P = dayData.amountRemovedFromP2P.plus(event.params._amountRemovedFromP2P)
 
+  // for supplier position 
+  dayData.netAmountSuppliedOnPool = dayData.netAmountSuppliedOnPool.plus(event.params._amountAddedOnPool).minus(event.params._amountRemovedFromPool)
+  dayData.amountSuppliedOnPool = dayData.amountSuppliedOnPool.plus(event.params._amountAddedOnPool)
+
+  //user and date
+
+  const day = event.block.timestamp.toI32() / 86400
+  const date = day * 86400
+
+  if (!dayData.date) {
+    dayData.date = date
+  }
+
+  let userData = User.load(event.params._account.toHexString())
+  if (userData == null) {
+
+    userData = new User(event.params._account.toHexString())
+    userData.date = date
+    userData.save()
+
+    dayData.userCount = dayData.userCount.plus(BigInt.fromI32(1))
+    dayData.newUsers = dayData.newUsers.plus(BigInt.fromI32(1))
+
+    let allData = AllTimeDataForMarket.load(event.params._cTokenAddress.toHexString())
+    if (allData){
+      allData.userCount = allData.userCount.plus(BigInt.fromI32(1))
+      allData.save()
+    }
+
+  } else {
+    if (userData.date <= dayData.date ){
+      userData.date = date
+      userData.save()
+      dayData.userCount = dayData.userCount.plus(BigInt.fromI32(1))
+    } else {
+      userData.date = date
+      userData.save()
+    }
+  }
+
   return dayData as DailyDataForMarket
 
 }
@@ -96,6 +180,10 @@ export function updatePositionsAllTimeDataBorrow(event: BorrowerPositionUpdated)
   allData.netAmountAddedOnPool = allData.netAmountAddedOnPool.plus(event.params._amountAddedOnPool).minus(event.params._amountRemovedFromPool)
   allData.netAmountAddedInP2P = allData.netAmountAddedInP2P.plus(event.params._amountAddedInP2P).minus(event.params._amountRemovedFromP2P)
 
+  //borrower
+  allData.netAmountBorrowedOnPool = allData.netAmountBorrowedOnPool.plus(event.params._amountAddedOnPool).minus(event.params._amountRemovedFromPool)
+  allData.amountBorrowedOnPool = allData.amountBorrowedOnPool.plus(event.params._amountAddedOnPool)
+
   return allData as AllTimeDataForMarket
 
 }
@@ -122,6 +210,10 @@ export function updatePositionsAllTimeDataSupply(event: SupplierPositionUpdated)
   allData.amountRemovedFromP2P = allData.amountRemovedFromP2P.plus(event.params._amountRemovedFromP2P)
   allData.netAmountAddedOnPool = allData.netAmountAddedOnPool.plus(event.params._amountAddedOnPool).minus(event.params._amountRemovedFromPool)
   allData.netAmountAddedInP2P = allData.netAmountAddedInP2P.plus(event.params._amountAddedInP2P).minus(event.params._amountRemovedFromP2P)
+
+  //supplier
+  allData.netAmountSuppliedOnPool = allData.netAmountSuppliedOnPool.plus(event.params._amountAddedOnPool).minus(event.params._amountRemovedFromPool)
+  allData.amountSuppliedOnPool = allData.amountSuppliedOnPool.plus(event.params._amountAddedOnPool)
 
   return allData as AllTimeDataForMarket
 

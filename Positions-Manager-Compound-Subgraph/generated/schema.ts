@@ -21,6 +21,15 @@ export class DailyDataForMarket extends Entity {
     this.set("amountAddedInP2P", Value.fromBigInt(BigInt.zero()));
     this.set("amountRemovedFromPool", Value.fromBigInt(BigInt.zero()));
     this.set("amountRemovedFromP2P", Value.fromBigInt(BigInt.zero()));
+    this.set("netAmountAddedOnPool", Value.fromBigInt(BigInt.zero()));
+    this.set("netAmountAddedInP2P", Value.fromBigInt(BigInt.zero()));
+    this.set("amountSuppliedOnPool", Value.fromBigInt(BigInt.zero()));
+    this.set("amountBorrowedOnPool", Value.fromBigInt(BigInt.zero()));
+    this.set("netAmountSuppliedOnPool", Value.fromBigInt(BigInt.zero()));
+    this.set("netAmountBorrowedOnPool", Value.fromBigInt(BigInt.zero()));
+    this.set("userCount", Value.fromBigInt(BigInt.zero()));
+    this.set("newUsers", Value.fromBigInt(BigInt.zero()));
+    this.set("date", Value.fromI32(0));
   }
 
   save(): void {
@@ -95,6 +104,87 @@ export class DailyDataForMarket extends Entity {
   set amountRemovedFromP2P(value: BigInt) {
     this.set("amountRemovedFromP2P", Value.fromBigInt(value));
   }
+
+  get netAmountAddedOnPool(): BigInt {
+    let value = this.get("netAmountAddedOnPool");
+    return value!.toBigInt();
+  }
+
+  set netAmountAddedOnPool(value: BigInt) {
+    this.set("netAmountAddedOnPool", Value.fromBigInt(value));
+  }
+
+  get netAmountAddedInP2P(): BigInt {
+    let value = this.get("netAmountAddedInP2P");
+    return value!.toBigInt();
+  }
+
+  set netAmountAddedInP2P(value: BigInt) {
+    this.set("netAmountAddedInP2P", Value.fromBigInt(value));
+  }
+
+  get amountSuppliedOnPool(): BigInt {
+    let value = this.get("amountSuppliedOnPool");
+    return value!.toBigInt();
+  }
+
+  set amountSuppliedOnPool(value: BigInt) {
+    this.set("amountSuppliedOnPool", Value.fromBigInt(value));
+  }
+
+  get amountBorrowedOnPool(): BigInt {
+    let value = this.get("amountBorrowedOnPool");
+    return value!.toBigInt();
+  }
+
+  set amountBorrowedOnPool(value: BigInt) {
+    this.set("amountBorrowedOnPool", Value.fromBigInt(value));
+  }
+
+  get netAmountSuppliedOnPool(): BigInt {
+    let value = this.get("netAmountSuppliedOnPool");
+    return value!.toBigInt();
+  }
+
+  set netAmountSuppliedOnPool(value: BigInt) {
+    this.set("netAmountSuppliedOnPool", Value.fromBigInt(value));
+  }
+
+  get netAmountBorrowedOnPool(): BigInt {
+    let value = this.get("netAmountBorrowedOnPool");
+    return value!.toBigInt();
+  }
+
+  set netAmountBorrowedOnPool(value: BigInt) {
+    this.set("netAmountBorrowedOnPool", Value.fromBigInt(value));
+  }
+
+  get userCount(): BigInt {
+    let value = this.get("userCount");
+    return value!.toBigInt();
+  }
+
+  set userCount(value: BigInt) {
+    this.set("userCount", Value.fromBigInt(value));
+  }
+
+  get newUsers(): BigInt {
+    let value = this.get("newUsers");
+    return value!.toBigInt();
+  }
+
+  set newUsers(value: BigInt) {
+    this.set("newUsers", Value.fromBigInt(value));
+  }
+
+  get date(): i32 {
+    let value = this.get("date");
+    return value!.toI32();
+  }
+
+  set date(value: i32) {
+    this.set("date", Value.fromI32(value));
+  }
 }
 
 export class AllTimeDataForMarket extends Entity {
@@ -109,6 +199,11 @@ export class AllTimeDataForMarket extends Entity {
     this.set("amountRemovedFromP2P", Value.fromBigInt(BigInt.zero()));
     this.set("netAmountAddedOnPool", Value.fromBigInt(BigInt.zero()));
     this.set("netAmountAddedInP2P", Value.fromBigInt(BigInt.zero()));
+    this.set("amountSuppliedOnPool", Value.fromBigInt(BigInt.zero()));
+    this.set("amountBorrowedOnPool", Value.fromBigInt(BigInt.zero()));
+    this.set("netAmountSuppliedOnPool", Value.fromBigInt(BigInt.zero()));
+    this.set("netAmountBorrowedOnPool", Value.fromBigInt(BigInt.zero()));
+    this.set("userCount", Value.fromBigInt(BigInt.zero()));
   }
 
   save(): void {
@@ -200,5 +295,94 @@ export class AllTimeDataForMarket extends Entity {
 
   set netAmountAddedInP2P(value: BigInt) {
     this.set("netAmountAddedInP2P", Value.fromBigInt(value));
+  }
+
+  get amountSuppliedOnPool(): BigInt {
+    let value = this.get("amountSuppliedOnPool");
+    return value!.toBigInt();
+  }
+
+  set amountSuppliedOnPool(value: BigInt) {
+    this.set("amountSuppliedOnPool", Value.fromBigInt(value));
+  }
+
+  get amountBorrowedOnPool(): BigInt {
+    let value = this.get("amountBorrowedOnPool");
+    return value!.toBigInt();
+  }
+
+  set amountBorrowedOnPool(value: BigInt) {
+    this.set("amountBorrowedOnPool", Value.fromBigInt(value));
+  }
+
+  get netAmountSuppliedOnPool(): BigInt {
+    let value = this.get("netAmountSuppliedOnPool");
+    return value!.toBigInt();
+  }
+
+  set netAmountSuppliedOnPool(value: BigInt) {
+    this.set("netAmountSuppliedOnPool", Value.fromBigInt(value));
+  }
+
+  get netAmountBorrowedOnPool(): BigInt {
+    let value = this.get("netAmountBorrowedOnPool");
+    return value!.toBigInt();
+  }
+
+  set netAmountBorrowedOnPool(value: BigInt) {
+    this.set("netAmountBorrowedOnPool", Value.fromBigInt(value));
+  }
+
+  get userCount(): BigInt {
+    let value = this.get("userCount");
+    return value!.toBigInt();
+  }
+
+  set userCount(value: BigInt) {
+    this.set("userCount", Value.fromBigInt(value));
+  }
+}
+
+export class User extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("date", Value.fromI32(0));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save User entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save User entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("User", id.toString(), this);
+    }
+  }
+
+  static load(id: string): User | null {
+    return changetype<User | null>(store.get("User", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get date(): i32 {
+    let value = this.get("date");
+    return value!.toI32();
+  }
+
+  set date(value: i32) {
+    this.set("date", Value.fromI32(value));
   }
 }

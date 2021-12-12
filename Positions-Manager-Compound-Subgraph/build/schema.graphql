@@ -7,6 +7,15 @@ type DailyDataForMarket @entity {
   amountAddedInP2P: BigInt!
   amountRemovedFromPool: BigInt!
   amountRemovedFromP2P: BigInt!
+  netAmountAddedOnPool: BigInt!
+  netAmountAddedInP2P: BigInt!
+  amountSuppliedOnPool: BigInt!
+  amountBorrowedOnPool: BigInt!
+  netAmountSuppliedOnPool: BigInt!
+  netAmountBorrowedOnPool: BigInt!
+  userCount: BigInt!
+  newUsers: BigInt!
+  date: Int!
 }
 
 type AllTimeDataForMarket @entity {
@@ -18,4 +27,14 @@ type AllTimeDataForMarket @entity {
   amountRemovedFromP2P: BigInt!
   netAmountAddedOnPool: BigInt!
   netAmountAddedInP2P: BigInt!
+  amountSuppliedOnPool: BigInt!
+  amountBorrowedOnPool: BigInt!
+  netAmountSuppliedOnPool: BigInt!
+  netAmountBorrowedOnPool: BigInt!
+  userCount: BigInt!
+}
+
+type User @entity {
+  id: ID!
+  date: Int!
 }
