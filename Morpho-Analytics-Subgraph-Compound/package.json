@@ -1,0 +1,16 @@
+{
+  "name": "Morpho-Analytics-Subgraph-Compound",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ morpho-labs/Morpho-Analytics-Subgraph-Compound",
+    "create-local": "graph create --node http://localhost:8020/ morpho-labs/Morpho-Analytics-Subgraph-Compound",
+    "remove-local": "graph remove --node http://localhost:8020/ morpho-labs/Morpho-Analytics-Subgraph-Compound",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 morpho-labs/Morpho-Analytics-Subgraph-Compound"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.24.0",
+    "@graphprotocol/graph-ts": "0.24.0"
+  }
+}

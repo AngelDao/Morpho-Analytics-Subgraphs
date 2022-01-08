@@ -1,0 +1,42 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: PositionsManagerForCompound
+    network: ropsten
+    source:
+      address: "0xc4fcdb90e76c84ead1f1bc2427866d0c8c3198fa"
+      abi: PositionsManagerForCompound
+      startBlock: 11506156
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Borrowed
+        - BorrowerPositionUpdated
+        - Liquidated
+        - Repaid
+        - Supplied
+        - SupplierPositionUpdated
+        - Withdrawn
+      abis:
+        - name: PositionsManagerForCompound
+          file: ./abis/PositionsManagerForCompound.json
+        - name: MarketsManager
+          file: ./abis/MarketsManagerForComp.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: cERC20
+          file: ./abis/cERC20.json
+        - name: Comptroller
+          file: ./abis/comptroller.json
+        - name: Oracle
+          file: ./abis/oracleComp.json
+      eventHandlers:
+        - event: BorrowerPositionUpdated(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBorrowerPositionUpdated
+        - event: SupplierPositionUpdated(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256,uint256)
+          handler: handleSupplierPositionUpdated
+      file: ./src/mapping.ts

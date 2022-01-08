@@ -1,0 +1,32 @@
+# one of these for each pool, for live and daily data
+
+type DailyDataForMarket @entity {
+  id: ID!
+  poolTokenAddress: Bytes!
+  startingBorrowBalanceOnPool: BigInt!
+  startingBorrowBalanceInP2P: BigInt!
+  netBorrowAddedOnPool: BigInt!
+  netBorrowAddedInP2P: BigInt!
+  startingSupplyBalanceOnPool: BigInt!
+  startingSupplyBalanceInP2P: BigInt!
+  netSupplyAddedOnPool: BigInt!
+  netSupplyAddedInP2P: BigInt!
+  userCount: BigInt!
+  newUsers: BigInt!
+  date: Int!
+}
+
+type AllTimeDataForMarket @entity {
+  id: ID!
+  poolTokenAddress: Bytes!
+  netBorrowAddedOnPool: BigInt!
+  netBorrowAddedInP2P: BigInt!
+  netSupplyAddedOnPool: BigInt!
+  netSupplyAddedInP2P: BigInt!
+  userCount: BigInt!
+}
+
+type User @entity {
+  id: ID!
+  date: Int!
+}
